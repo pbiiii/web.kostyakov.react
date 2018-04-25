@@ -1,0 +1,9 @@
+import React from 'react'
+import { NavBar } from "../../components/NavBar";
+
+export const Register = () => (
+    <div>
+        <NavBar/>
+        Register page
+    </div>
+)

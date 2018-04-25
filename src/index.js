@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { Root } from './Root'
+import { history } from './core/browser'
 import registerServiceWorker from './registerServiceWorker';
+import 'element-theme-default'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const MOUNT_NODE = document.getElementById('root')
+
+const render = (Component) => {
+    ReactDOM.render(<Component history={history} />, MOUNT_NODE)
+}
+
+render(Root)
 registerServiceWorker();
