@@ -3,3 +3,21 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+body, html, #root {
+  height: 100%;
+}
+
+#root > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#root .wrapper {
+  flex-grow: 2;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+}

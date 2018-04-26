@@ -1,9 +1,10 @@
 import React from 'react'
-import { NavBar } from "../../components/NavBar";
+import { RegisterForm } from './components/RegisterForm'
 
 export const Register = () => (
     <div>
-        <NavBar/>
-        Register page
+        <div className="wrapper">
+            <RegisterForm/>
+        </div>
     </div>
 )

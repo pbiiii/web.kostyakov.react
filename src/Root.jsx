@@ -1,11 +1,14 @@
 import React from 'react'
-// import { Provider } from 'react-redux'
-import {Router} from 'react-router-dom'
-// import { store } from 'store'
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'react-router-redux'
 import App from './views/App'
 
-export const Root = ({history}) => (
-    <Router history={history}>
-        <App/>
-    </Router>
+export const Root = ({store, history}) => (
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <div>
+                <App/>
+            </div>
+        </ConnectedRouter>
+    </Provider>
 )

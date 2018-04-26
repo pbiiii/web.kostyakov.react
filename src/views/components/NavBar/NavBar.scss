@@ -1,8 +1,16 @@
 nav {
+  background-color: #d3dce6;
+  padding: 0 1em;
   a {
+    color: #333;
+    text-decoration: none;
+    padding: 1em;
+    display: inline-block;
     + a {
       margin-left: 1em;
     }
-    color: #333;
+    &.active {
+      text-decoration: underline;
+    }
   }
 }

@@ -1,19 +1,16 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { Home, Login, Register } from "./screens";
+import { NavBar } from "./components/NavBar";
 
-class App extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
-                    <Redirect to="/" />
-                </Switch>
-            </React.Fragment>
-        )
-    }
-}
+const App = () => (
+    <div>
+        <NavBar/>
+        <main className="wrapper">
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+        </main>
+    </div>
+)
 export default App
