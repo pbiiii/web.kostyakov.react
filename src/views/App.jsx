@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import { Home, Login, Register } from "./screens";
+import { Home, Login } from "./screens";
+import Register from './screens/Register/Register'
 import { NavBar } from "./components/NavBar";
 
 const App = () => (
@@ -8,8 +9,8 @@ const App = () => (
         <NavBar/>
         <main className="wrapper">
             <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
         </main>
     </div>
 )
