@@ -9,6 +9,7 @@ const initialState = {}
 const enhancers = []
 const middleware= [
     thunk,
+
     routerMiddleware(history)
 ]
 
@@ -30,5 +31,12 @@ const store = createStore(
     initialState,
     composedEnhancers,
 )
+
+if (module.hot) {
+    module.hot.accept('./../reducers', () => {
+        const nextRootReducer = require('./../reducers')
+        store.replaceReducer(nextRootReducer)
+    })
+}
 
 export default store
