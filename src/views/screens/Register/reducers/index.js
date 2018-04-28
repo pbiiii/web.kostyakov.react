@@ -1,1 +1,0 @@
-export {register as reducer} from './register'

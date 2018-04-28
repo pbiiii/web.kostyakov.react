@@ -1,10 +1,10 @@
 import React  from 'react';
 import { bindActionCreators } from 'redux'
-import { register } from "./actions";
+import { register } from "../../../store/session/auth/actions";
 import { RegisterForm } from './components/RegisterForm'
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { Message } from 'element-react'
 
 class Register extends React.Component {
@@ -13,15 +13,6 @@ class Register extends React.Component {
         this.state = {
             email: '',
             password: '',
-        }
-    }
-    componentWillUpdate(nextProps, nextState) {
-        if(nextProps.registerSuccess) {
-            Message({
-                message: 'Register success',
-                type: 'success'
-            })
-            nextProps.history.push('/login')
         }
     }
     handleChange = (e) => {
@@ -33,7 +24,18 @@ class Register extends React.Component {
         const { email, password } = this.state;
         this.props.register(email, password);
     }
+    componentDidUpdate() {
+        if(this.props.registerSuccess) {
+            Message({
+                message: 'Register success',
+                type: 'success'
+            })
+        }
+    }
     render() {
+        if(this.props.registerSuccess) {
+            return <Redirect to='/login'/>
+        }
         return (
             <div>
                 <RegisterForm
@@ -66,4 +68,3 @@ const enhance = compose(
 );
 
 export default enhance(Register);
-// export default connect(mapStateToProps, mapDispatchToProps)(Register);

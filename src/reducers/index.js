@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import { register } from "../views/screens/Register/reducers/register";
+import { register } from "../store/session/auth";
 
 export default combineReducers({
     routing: routerReducer,
