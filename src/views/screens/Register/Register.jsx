@@ -1,6 +1,6 @@
 import React  from 'react';
 import { bindActionCreators } from 'redux'
-import { register } from "../../../store/session/auth/actions";
+import { registerAction } from "../../../store/session/auth/actions";
 import { RegisterForm } from './components/RegisterForm'
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
@@ -31,9 +31,15 @@ class Register extends React.Component {
                 type: 'success'
             })
         }
+        if(this.props.userAlreadyExists) {
+            Message({
+                message: `User with email ${this.state.email} already registered`,
+                type: 'warning'
+            })
+        }
     }
     render() {
-        if(this.props.registerSuccess) {
+        if(this.props.registerSuccess || this.props.userAlreadyExists) {
             return <Redirect to='/login'/>
         }
         return (
@@ -51,13 +57,14 @@ class Register extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        registerSuccess: state.register.registerSuccess
+        registerSuccess: state.auth.register.registerSuccess,
+        userAlreadyExists: state.auth.register.userAlreadyExists
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        register: bindActionCreators(register, dispatch),
+        register: bindActionCreators(registerAction, dispatch),
     }
 }
 
@@ -67,4 +74,4 @@ const enhance = compose(
     withStore
 );
 
-export default enhance(Register);
+export const RegisterScreen = enhance(Register);

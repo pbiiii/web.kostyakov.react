@@ -1,1 +1,1 @@
-export { Register } from './Register'
+export { RegisterScreen } from './Register'

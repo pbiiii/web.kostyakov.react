@@ -1,1 +1,1 @@
-export {register} from './actions'
+export {registerAction, loginAction} from './actions'

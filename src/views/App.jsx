@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import { Home, Login } from "./screens";
-import Register from './screens/Register/Register'
+import { Register, Login, Home } from './screens'
 import { NavBar } from "./components/NavBar";
 
 const App = () => (

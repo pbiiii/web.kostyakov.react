@@ -1,3 +1,3 @@
-export { Home } from './Home'
-export { Register } from './Register'
-export { Login } from './Login'
+export { RegisterScreen as Register } from './Register'
+export { LoginScreen as Login } from './Login'
+export { HomeScreen as Home } from './Home'

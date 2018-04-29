@@ -1,7 +1,7 @@
 import * as types from './actionTypes'
 import { client } from '@/core/api'
 
-export const register = (email, password) => {
+export const registerAction = (email, password) => {
     return (dispatch) => {
         client.post('/users', {email, password})
             .then(() => {
@@ -10,15 +10,19 @@ export const register = (email, password) => {
                     payload: false
                 })
             })
-            .catch(({status}) => {
+            .catch(({response}) => {
+                const {status} = response
                 if (status === 422) {
-
+                    dispatch({
+                        type: types.USER_ALREADY_EXISTS,
+                        payload: false
+                    })
                 }
             })
     }
 }
 
-export const login = (email, password) => {
+export const loginAction = (email, password) => {
     return (dispatch) => {
         client.post('/users/login', {email, password})
             .then(() => {
