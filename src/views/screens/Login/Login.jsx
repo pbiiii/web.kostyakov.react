@@ -5,7 +5,6 @@ import { compose } from 'ramda';
 import { LoginForm } from "./components/LoginForm";
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
-import { Message } from 'element-react'
 
 class Login extends React.Component {
     constructor(props) {
@@ -25,7 +24,7 @@ class Login extends React.Component {
         this.props.login(email, password);
     }
     render() {
-        if(this.props.loginSuccess) {
+        if(this.props.token) {
             return <Redirect to='/'/>
         }
         return (
@@ -43,7 +42,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loginSuccess: state.auth.login.loginSuccess,
+        token: state.auth.token,
     }
 }
 

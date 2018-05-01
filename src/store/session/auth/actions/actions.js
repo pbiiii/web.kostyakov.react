@@ -11,7 +11,7 @@ export const registerAction = (email, password) => {
                 })
             })
             .catch(({response}) => {
-                const {status} = response
+                const { status } = response
                 if (status === 422) {
                     dispatch({
                         type: types.USER_ALREADY_EXISTS,
@@ -25,16 +25,29 @@ export const registerAction = (email, password) => {
 export const loginAction = (email, password) => {
     return (dispatch) => {
         client.post('/users/login', {email, password})
-            .then(() => {
+            .then(({data}) => {
                 dispatch({
-                    type: types.REGISTER_SUCCESS,
-                    payload: false
+                    type: types.LOGIN_SUCCESS,
+                    payload: data.id
                 })
             })
-            .catch(({status}) => {
-                if (status === 422) {
-
+            .catch(({response}) => {
+                const { status } = response
+                if (status === 401) {
+                    dispatch({
+                        type: types.BAD_CREDENTIALS,
+                        payload: false
+                    })
                 }
             })
+    }
+}
+
+export const logoutAction = () => {
+    return (dispatch) => {
+        dispatch({
+            type: types.LOGOUT,
+            payload: null
+        })
     }
 }

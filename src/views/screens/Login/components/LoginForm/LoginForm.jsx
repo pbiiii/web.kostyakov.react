@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Button } from 'element-react'
-import './LoginForm.scss'
 
 export const LoginForm = ({password, email, onChange, onSubmit}) => (
     <Form labelWidth="120" onSubmit={onSubmit}>

@@ -5,6 +5,7 @@ export const client = axios.create({
     headers: {
         'Content-Type' : 'application/json',
         'Accept' : 'application/json',
+        'access_token' : localStorage.getItem('token') || null
     }
 })
 const onResponseFulfilled = config => config
