@@ -6,9 +6,7 @@ import App from './views/App'
 export const Root = ({store, history}) => (
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <div>
-                <App/>
-            </div>
+            <App/>
         </ConnectedRouter>
     </Provider>
 )

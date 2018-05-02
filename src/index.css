@@ -15,9 +15,5 @@ body, html, #root {
 }
 
 #root .wrapper {
-  flex-grow: 2;
-  align-items: center;
-  align-content: center;
-  display: flex;
-  justify-content: center;
+  padding: 1em 0;
 }
