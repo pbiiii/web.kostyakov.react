@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card } from 'element-react'
 import {TaskItem} from "../TaskItem";
 
-export const TasksList = ({tasks, onAddTask, onDeleteTask}) => (
+export const TasksList = ({tasks, onAddTask, onDeleteTask, onChangeTaskDoneStatus}) => (
     <Card
         className="box-card"
         header={
@@ -22,6 +22,7 @@ export const TasksList = ({tasks, onAddTask, onDeleteTask}) => (
                     key={task.id}
                     task={task}
                     onDeleteTask={onDeleteTask}
+                    onChangeTaskDoneStatus={onChangeTaskDoneStatus}
                 />
             )) :
             <div>

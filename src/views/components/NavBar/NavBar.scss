@@ -1,6 +1,9 @@
 nav {
   background-color: #d3dce6;
   padding: 0 1em;
+  .link {
+    cursor: pointer;
+  }
   a {
     color: #333;
     text-decoration: none;

@@ -1,20 +1,19 @@
-import {removeTask} from "./helpers";
+import {removeTask, updateTask} from "./helpers";
 
-const initialState = {
-    tasks: [],
-}
+const initialState = []
+
 
 export const tasks = (state = initialState, action) => {
     switch (action.type) {
         case 'TASKS_FETCHED':
-            return {...state, tasks: action.payload}
+            return action.payload
         case 'TASK_ADDED':
-            state.tasks.unshift(action.payload)
-            return {...state, tasks: [].concat(state.tasks)}
+            state.unshift(action.payload)
+            return [].concat(state)
         case 'TASK_DELETED':
-            return {...state, tasks: removeTask(state.tasks, action.payload)}
-        case 'BAD_CREDENTIALS':
-            return {...state, badCredentials: true}
+            return removeTask(state, action.payload)
+        case 'TASK_COMPLETED':
+            return updateTask(state, action.payload)
         default:
             return state
     }

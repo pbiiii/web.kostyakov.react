@@ -1,1 +1,1 @@
-export {fetchTasksAction, addTaskAction, deleteTaskAction} from './actions'
+export {fetchTasksAction, addTaskAction, deleteTaskAction, changeTaskDoneStatusAction} from './actions'

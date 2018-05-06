@@ -9,31 +9,33 @@
       padding: 0;
       margin: 0;
     }
+    .is-success {
+      color: #13CE66;
+    }
+    .is-error {
+      color: #FF4949;
+    }
     .text {
       display: flex;
-      flex-direction: column;
       justify-content: flex-start;
       align-items: center;
       align-content: center;
       background-color: #D3DCE6;
-      padding: 1em 0;
+      padding: 1em;
       &:nth-of-type(odd) {
         background-color: #EFF2F7;
       }
     }
-    .item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      align-content: center;
+    .item-body {
+      flex-grow: 2;
+      .el-switch {
+        span {
+          color: #000;
+        }
+      }
     }
     .item-footer {
-      .is-success {
-        color: #13CE66;
-      }
-      .is-error {
-        color: #FF4949;
-      }
+
     }
   }
 }

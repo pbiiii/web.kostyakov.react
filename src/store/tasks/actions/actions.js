@@ -45,3 +45,15 @@ export const deleteTaskAction = (task) => {
             })
     }
 }
+
+export const changeTaskDoneStatusAction = (task, done) => {
+    return (dispatch) => {
+        client.patch(`/tasks/${task.id}`, {done})
+            .then(({data}) => {
+                dispatch({
+                    type: types.TASK_COMPLETED,
+                    payload: data
+                })
+            })
+    }
+}

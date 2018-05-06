@@ -1,4 +1,5 @@
 export const TASKS_FETCHED = 'TASKS_FETCHED';
 export const TASK_ADDED = 'TASK_ADDED';
 export const TASK_DELETED = 'TASK_DELETED';
+export const TASK_COMPLETED = 'TASK_COMPLETED';
 export const BAD_CREDENTIALS = 'BAD_CREDENTIALS';

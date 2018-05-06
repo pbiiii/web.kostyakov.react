@@ -1,21 +1,21 @@
 import React from 'react'
-import { withRouter, Redirect} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import {TasksList} from './components/TasksList'
-import {fetchTasksAction, addTaskAction, deleteTaskAction} from "../../../store/tasks/actions";
+import {fetchTasksAction, addTaskAction, deleteTaskAction, changeTaskDoneStatusAction} from "../../../store/tasks/actions";
 import './Home.scss'
-import {bindActionCreators} from "redux";
+import { bindActionCreators } from "redux";
 import { Layout } from 'element-react'
 
 class Home extends React.Component {
     componentDidMount() {
+        if(!this.props.token) {
+            return this.props.history.push('/login')
+        }
         return this.props.fetchTasks()
     }
     render() {
-        if(!this.props.token) {
-            return <Redirect to='/login'/>
-        }
         return (
             <Layout.Row type='flex' justify='center'>
                 <Layout.Col span={12}>
@@ -23,6 +23,7 @@ class Home extends React.Component {
                         tasks={this.props.tasks}
                         onAddTask={this.props.addTask}
                         onDeleteTask={this.props.deleteTask}
+                        onChangeTaskDoneStatus={this.props.changeTaskDoneStatus}
                     />
                 </Layout.Col>
             </Layout.Row>
@@ -32,7 +33,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        tasks: state.tasks.tasks.tasks,
+        tasks: state.tasks,
         token: state.auth.token,
     }
 }
@@ -42,6 +43,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchTasks: bindActionCreators(fetchTasksAction, dispatch),
         addTask: bindActionCreators(addTaskAction, dispatch),
         deleteTask: bindActionCreators(deleteTaskAction, dispatch),
+        changeTaskDoneStatus: bindActionCreators(changeTaskDoneStatusAction, dispatch),
     }
 }
 

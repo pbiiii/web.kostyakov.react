@@ -5,13 +5,27 @@ export const client = axios.create({
     headers: {
         'Content-Type' : 'application/json',
         'Accept' : 'application/json',
-        'access_token' : localStorage.getItem('token') || null
     }
 })
-const onResponseFulfilled = config => config
-const onResponseRejected = error => Promise.reject(error)
 
-client.interceptors.response.use(
+const onResponseFulfilled = (config) => {
+    const token = localStorage.getItem('token');
+    if (token !== null) {
+        config.headers.access_token = token;
+    }
+    return config;
+};
+
+
+const onResponseRejected = (error) => {
+    const {status} = error.response
+    if (status === 401) {
+        localStorage.removeItem('token')
+    }
+    return Promise.reject(error)
+}
+
+client.interceptors.request.use(
     onResponseFulfilled,
     onResponseRejected
 )
