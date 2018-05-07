@@ -3,7 +3,7 @@ import { Button, Switch } from 'element-react'
 import FaPencil from 'react-icons/lib/fa/pencil'
 import FaTrash from 'react-icons/lib/fa/trash'
 
-export const TaskItem = ({task, onDeleteTask, onChangeTaskDoneStatus}) => (
+export const TaskItem = ({task, deleteTask, changeTaskDoneStatus, openEditTaskModal}) => (
     <div className="text item" key={task.id} id={'task-'+task.id}>
         <div className="item-body">
             <div className="item-header">
@@ -14,15 +14,15 @@ export const TaskItem = ({task, onDeleteTask, onChangeTaskDoneStatus}) => (
                     offText="Не выполнена"
                     onColor="#13ce66"
                     offColor="#ff4949"
-                    width="130"
-                    onChange={() => {onChangeTaskDoneStatus(task, !task.done)}}
+                    width={130}
+                    onChange={() => {changeTaskDoneStatus(task, !task.done)}}
                 />
             </div>
             <p>{task.body}</p>
         </div>
         <div className="item-controls">
-            <Button type="warning"><FaPencil/></Button>
-            <Button type="danger" onClick={() => {onDeleteTask(task)}}><FaTrash/></Button>
+            <Button type="warning" onClick={() => {openEditTaskModal(task)}}><FaPencil/></Button>
+            <Button type="danger" onClick={() => {deleteTask(task)}}><FaTrash/></Button>
         </div>
     </div>
 )

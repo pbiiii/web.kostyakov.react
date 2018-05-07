@@ -57,3 +57,33 @@ export const changeTaskDoneStatusAction = (task, done) => {
             })
     }
 }
+
+export const openEditTaskModalAction = (task) => {
+    return (dispatch) => {
+        dispatch({
+            type: types.OPEN_EDIT_TASK_MODAL,
+            payload: task
+        })
+    }
+}
+
+export const closeEditTaskModalAction = () => {
+    return (dispatch) => {
+        dispatch({
+            type: types.CLOSE_EDIT_TASK_MODAL,
+            payload: null
+        })
+    }
+}
+
+export const updateTaskAction = (task) => {
+    return (dispatch) => {
+        client.patch(`/tasks/${task.id}`, task)
+            .then(({data}) => {
+                dispatch({
+                    type: types.TASK_UPDATED,
+                    payload: data
+                })
+            })
+    }
+}

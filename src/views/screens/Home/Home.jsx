@@ -3,10 +3,11 @@ import { withRouter } from "react-router-dom";
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import {TasksList} from './components/TasksList'
-import {fetchTasksAction, addTaskAction, deleteTaskAction, changeTaskDoneStatusAction} from "../../../store/tasks/actions";
+import {fetchTasksAction, addTaskAction, deleteTaskAction, changeTaskDoneStatusAction, openEditTaskModalAction} from "../../../store/tasks/actions";
 import './Home.scss'
 import { bindActionCreators } from "redux";
 import { Layout } from 'element-react'
+import { EditTaskModal } from './components/EditTaskModal'
 
 class Home extends React.Component {
     componentDidMount() {
@@ -21,11 +22,13 @@ class Home extends React.Component {
                 <Layout.Col span={12}>
                     <TasksList
                         tasks={this.props.tasks}
-                        onAddTask={this.props.addTask}
-                        onDeleteTask={this.props.deleteTask}
-                        onChangeTaskDoneStatus={this.props.changeTaskDoneStatus}
+                        addTask={this.props.addTask}
+                        deleteTask={this.props.deleteTask}
+                        changeTaskDoneStatus={this.props.changeTaskDoneStatus}
+                        openEditTaskModal={this.props.openEditTaskModal}
                     />
                 </Layout.Col>
+                <EditTaskModal/>
             </Layout.Row>
         )
     }
@@ -33,7 +36,8 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        tasks: state.tasks,
+        tasks: state.tasks.tasksList,
+        editTaskModalVisible: state.tasks.editTaskModalVisible,
         token: state.auth.token,
     }
 }
@@ -44,6 +48,7 @@ const mapDispatchToProps = (dispatch) => {
         addTask: bindActionCreators(addTaskAction, dispatch),
         deleteTask: bindActionCreators(deleteTaskAction, dispatch),
         changeTaskDoneStatus: bindActionCreators(changeTaskDoneStatusAction, dispatch),
+        openEditTaskModal: bindActionCreators(openEditTaskModalAction, dispatch),
     }
 }
 
