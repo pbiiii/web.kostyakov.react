@@ -11,42 +11,63 @@ class EditTaskModalComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: '',
-            title: '',
-            body: '',
+            task: {
+                id: '',
+                title: '',
+                body: '',
+            },
+            changed:false,
         }
     }
     componentDidUpdate(prevProps, prevState) {
         if(prevProps !== this.props) {
             let taskToEdit = Object.assign({}, this.props.taskToEdit)
             this.setState({
-                id: taskToEdit.id,
-                title: taskToEdit.title,
-                body: taskToEdit.body,
+                task: {
+                    id: taskToEdit.id,
+                    title: taskToEdit.title,
+                    body: taskToEdit.body,
+                }
             })
         }
     }
     handleChange = (e) => {
         const { name, value } = e.target
-        this.setState({ [name]: value })
+        this.setState({ task: Object.assign(this.state.task, {[name]: value}) })
+        this.setState({changed: true})
+    }
+    onClose() {
+        if(this.state.changed) {
+            let confirmed = window.confirm('Изменения не сохранятся, вы уверены что хотите закрыть окно?')
+            if(confirmed) {
+                this.setState({changed: false})
+                this.props.closeEditTaskModal()
+            }
+        } else {
+            this.props.closeEditTaskModal()
+        }
+    }
+    onUpdateTask(task) {
+        this.props.updateTask(task)
+        this.setState({changed: false})
     }
     render() {
         return (
             <Dialog
                 visible={this.props.visible}
-                onCancel={() => {this.props.closeEditTaskModal()}}
+                onCancel={() => {this.onClose()}}
                 title={`Редактирование задачи № ${this.props.taskToEdit ? this.props.taskToEdit.id : null}`}
             >
                 <Dialog.Body>
                     <EditTaskForm
-                        body={this.state.body}
-                        title={this.state.title}
+                        body={this.state.task.body}
+                        title={this.state.task.title}
                         onChange={this.handleChange}
                     />
                 </Dialog.Body>
                 <Dialog.Footer>
-                    <Button onClick={() => {this.props.updateTask(this.state)}}>Сохранить</Button>
-                    <Button type="primary" onClick={() => {this.props.closeEditTaskModal()}}>Отменить</Button>
+                    <Button disabled={!this.state.changed} onClick={() => {this.onUpdateTask(this.state.task)}}>Сохранить</Button>
+                    <Button type="primary" onClick={() => {this.onClose()}}>Отменить</Button>
                 </Dialog.Footer>
             </Dialog>
         )
