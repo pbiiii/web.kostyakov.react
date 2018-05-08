@@ -84,6 +84,10 @@ export const updateTaskAction = (task) => {
                     type: types.TASK_UPDATED,
                     payload: data
                 })
+                dispatch({
+                    type: types.CLOSE_EDIT_TASK_MODAL,
+                    payload: null
+                })
             })
     }
 }

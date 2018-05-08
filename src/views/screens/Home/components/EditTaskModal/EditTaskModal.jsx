@@ -11,20 +11,24 @@ class EditTaskModalComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: this.props.taskToEdit.title,
-            body: this.props.taskToEdit.body,
+            id: '',
+            title: '',
+            body: '',
         }
     }
-    componentDidUpdate() {
-        // let taskToEdit = Object.assign({}, this.props.taskToEdit)
-        // this.setState({
-        //     title: taskToEdit.title,
-        //     body: taskToEdit.body,
-        // })
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps !== this.props) {
+            let taskToEdit = Object.assign({}, this.props.taskToEdit)
+            this.setState({
+                id: taskToEdit.id,
+                title: taskToEdit.title,
+                body: taskToEdit.body,
+            })
+        }
     }
     handleChange = (e) => {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
+        const { name, value } = e.target
+        this.setState({ [name]: value })
     }
     render() {
         return (
@@ -41,7 +45,7 @@ class EditTaskModalComponent extends React.Component {
                     />
                 </Dialog.Body>
                 <Dialog.Footer>
-                    <Button >Сохранить</Button>
+                    <Button onClick={() => {this.props.updateTask(this.state)}}>Сохранить</Button>
                     <Button type="primary" onClick={() => {this.props.closeEditTaskModal()}}>Отменить</Button>
                 </Dialog.Footer>
             </Dialog>

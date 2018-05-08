@@ -7,7 +7,7 @@ export const EditTaskForm = ({body, title, onChange}) => (
             <input value={title} name="title" onChange={onChange}/>
         </Form.Item>
         <Form.Item label="Текст" labelWidth={120}>
-            <input value={body} name="body" onChange={onChange}/>
+            <textarea value={body} name="body" onChange={onChange}>{body}</textarea>
         </Form.Item>
     </Form>
 )

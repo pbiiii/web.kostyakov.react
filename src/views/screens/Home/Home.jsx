@@ -11,10 +11,18 @@ import { EditTaskModal } from './components/EditTaskModal'
 
 class Home extends React.Component {
     componentDidMount() {
+        this.checkAuth()
+        return this.props.fetchTasks()
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps !== this.props) {
+            this.checkAuth()
+        }
+    }
+    checkAuth() {
         if(!this.props.token) {
             return this.props.history.push('/login')
         }
-        return this.props.fetchTasks()
     }
     render() {
         return (
