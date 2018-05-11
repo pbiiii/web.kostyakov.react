@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Input} from 'element-react'
+import {Form} from 'element-react'
 
 export const EditTaskForm = ({body, title, onChange}) => (
     <Form >
