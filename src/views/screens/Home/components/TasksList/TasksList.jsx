@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, Card } from 'element-react'
 import {TaskItem} from "../TaskItem";
+import {Redo, Undo} from "../UndoRedo";
 
-export const TasksList = ({tasks, addTask, deleteTask, changeTaskDoneStatus, openEditTaskModal}) => (
+export const TasksList = ({tasks, addTask, deleteTask, changeTaskDoneStatus, openEditTaskModal, onUndo, onRedo, canUndo, canRedo}) => (
     <Card
         className="box-card"
         header={
@@ -13,6 +14,14 @@ export const TasksList = ({tasks, addTask, deleteTask, changeTaskDoneStatus, ope
                 }}>
                     Добавить задачу
                 </Button>
+                <Undo
+                    onUndo={onUndo}
+                    canUndo={canUndo}
+                />
+                <Redo
+                    onRedo={onRedo}
+                    canRedo={canRedo}
+                />
             </div>
         }
     >
