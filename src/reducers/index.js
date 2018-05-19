@@ -2,21 +2,16 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 import { reducer as auth } from "../store/session/auth";
 import { tasks } from "../store/tasks/reducers";
-import undoable from 'redux-undo'
+import { editTask } from "../store/tasks/reducers";
+import undoable, { includeAction } from 'redux-undo'
 
 export default combineReducers({
     routing: routerReducer,
     auth,
-    tasks : undoable(tasks, {
-        limit: 20,
-        filter: (action, currentState, previousHistory) => {
-            let actionsToUndo = [
-                'TASK_ADDED',
-                'TASK_DELETED',
-                'TASK_COMPLETED',
-                'TASK_UPDATED'
-            ]
-            return actionsToUndo.includes(action.type)
-        }
-    }),
+    tasks,
+    editTask: undoable(editTask, {
+        ignoreInitialState: true,
+        filter: includeAction('CHANGE_TASK_EDIT_FORM'),
+        syncFilter: true,
+    })
 })

@@ -76,6 +76,15 @@ export const closeEditTaskModalAction = () => {
     }
 }
 
+export const changeTaskEditForm = (task) => {
+    return (dispatch) => {
+        dispatch({
+            type: types.CHANGE_TASK_EDIT_FORM,
+            payload: task
+        })
+    }
+}
+
 export const updateTaskAction = (task) => {
     return (dispatch) => {
         client.patch(`/tasks/${task.id}`, task)
