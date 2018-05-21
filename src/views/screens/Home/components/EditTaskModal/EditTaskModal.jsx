@@ -16,9 +16,6 @@ class EditTaskModalComponent extends React.Component {
             changed:false
         }
     }
-    componentDidUpdate(prevProps, prevState) {
-
-    }
     handleChange = (e) => {
         e.preventDefault()
         this.props.changeTaskEditForm(e.target)

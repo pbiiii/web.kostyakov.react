@@ -21,7 +21,14 @@ export const TaskItem = ({task, deleteTask, changeTaskDoneStatus, openEditTaskMo
             <p>{task.body}</p>
         </div>
         <div className="item-controls">
-            <Button type="warning" onClick={() => {openEditTaskModal(task)}}><FaPencil/></Button>
+            <Button type="warning" onClick={() => {openEditTaskModal(
+                {
+                    id: task.id || 0,
+                    body: task.body || '',
+                    title: task.title || '',
+                    done: task.done || false
+                }
+            )}}><FaPencil/></Button>
             <Button type="danger" onClick={() => {deleteTask(task)}}><FaTrash/></Button>
         </div>
     </div>
